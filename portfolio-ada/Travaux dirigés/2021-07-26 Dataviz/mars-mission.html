@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style-mars.css">
+  </head>
+  <body style="background-image: url('spaceimg.jpg');"></body>
+    <img id="photoMars" src="" /> 
+    <script>
+      var photosMars = []
+      var slide = photosMars
+      var numero = 0
+      var photoAffichee = document.getElementById('photoMars')
+
+      function ChangeSlide (sens) {
+        console.log('in')
+        numero = numero + sens
+        if (numero < 0) numero = slide.length - 1
+        if (numero > slide.length - 1) numero = 0
+        photoAffichee.src = slide[numero]
+        console.log('out')
+      }
+
+      //Récupération des photos de mars depuis API NASA
+      fetch(
+        'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=DEMO_KEY'
+      )
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          for (let i = 0; i < data.photos.length; i++)
+            photosMars.push(data.photos[i].img_src)
+          console.log(photosMars)
+          photoAffichee.setAttribute('src', photosMars[0])
+
+          setInterval('ChangeSlide(1)', 4000)
+          console.log(numero)
+        })
+        .catch(err => {
+          console.log('rejected', err)
+        })
+    </script>
+  </body>
+</html>

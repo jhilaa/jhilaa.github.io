@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Utiliser des API</title>
+</head>
+
+<body>
+ <img src="" id="image" width="300px">
+<script>
+    
+//const fetch = require("node-fetch");
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+
+//fetch("https://www.affirmations.dev/")
+fetch("https://api.thecatapi.com/v1/images/search?format=json")
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
+
+      // Examine the text in the response
+      response.json().then(function(data) {
+        console.log(data);
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+
+
+
+</script>
+</body>
+</html>

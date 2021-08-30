@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+     <head>
+          <title>TD : test de vérification de formulaire"</title>
+          <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+          <script type="text/javascript">
+          <!--
+		  //------------------------------
+		  function surligne (vChamp, vErreur)
+		  {
+		   if(vErreur)
+			  vChamp.style.backgroundColor = "#fba";
+		   else
+			  vChamp.style.backgroundColor = "";
+		  }
+		  
+		  //------------------------------
+		  function verifPseudo (vChampPseudo)
+		  {
+			if (vChampPseudo.value.length < 2 || vChampPseudo.value.length > 25)
+			{
+				  surligne(vChampPseudo, true);
+				  console.log ("erreur dans le pseudo");
+				  return false;
+			}
+			else
+			{
+				  surligne(vChampPseudo, false);
+				  console.log ("pseudo ok");
+				  return true;
+			}
+		  }
+		  
+		  //------------------------------
+		  function verifEmail (vChampEmail)
+		  {
+			let regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			if(!regex.test(vChampEmail.value))
+			{
+				  surligne(vChampEmail, true);
+				  console.log ("erreur dans l'email");
+				  return false;
+			}
+			else
+			{
+				  surligne(vChampEmail, false);
+				  console.log ("email ok");
+				  return true;
+			}
+		  }
+		  
+		  //------------------------------
+		  function verifAge (vChampAge)
+		  {
+			let age = parseInt (vChampAge.value);
+			 if(isNaN(age) || age < 5 || age > 111)
+			 {
+				surligne(vChampAge, true);
+				console.log ("erreur dans l'age");
+				return false;
+			 }
+			 else
+			 {
+				surligne(vChampAge, false);
+				console.log ("age ok");
+				return true;
+			 }
+		  }
+		  
+		  //------------------------------
+		  function verifForm (vForm)
+		  {
+			let pseudoOK = verifPseudo (vForm.pseudo);
+			let emailOK = verifEmail (vForm.email);
+			let ageOK = verifAge (vForm.age);
+			
+			console.log ( pseudoOK && emailOK && ageOK);
+			
+			return pseudoOK && emailOK && ageOK;
+		  }
+          //-->
+          </script>
+
+     </head>
+     <body>
+        
+		<form action="page.php" onsubmit="return verifForm(this)">
+		  <p>
+			Pseudo : <input type="text" name="pseudo" /> (entre 2 et 24 caractères)<br />
+			E-mail : <input type="text" name="email" size="30" /> (30 caractères maximum)<br />
+			Âge : <input type="text" name="age" size="2" /> ans (entre 5 et 99)<br />
+			<input type="submit" value="Valider" />
+		  </p>
+		</form>
+                
+     </body>
+</html>

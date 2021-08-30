@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>temps de réponse</title>
+</head>
+
+<body>
+<script>
+
+function tempo(delai) {
+    setTimeout(function() {},delai)
+}
+
+console.log ("- 1 -----------");
+function mainSerie() {
+    let debutMain=new Date().getTime();
+    //--
+        //----
+        let debut5000=new Date().getTime();
+        tempo(5000);
+        let fin5000=new Date().getTime();
+        console.log ("Durée du tempo5000 dans mainSerie() = " + (fin5000-debut5000));
+        //-----------
+        let debut1000=new Date().getTime();
+        tempo(1000);
+        let fin1000=new Date().getTime();
+        console.log ("Durée des tempo1000 dans mainSerie() = " + (fin1000-debut1000));
+        //--
+    let finMain=new Date().getTime();
+    console.log ("Durée des tempo inside mainSerie() = " + (finMain-debutMain));
+};
+
+console.log ("- 0 ----------");
+let debutMainSerie=new Date().getTime();
+mainSerie()
+let finMainSerie=new Date().getTime();
+console.log ("Durée de mainSerie() = " + (finMainSerie-debutMainSerie));
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de snap.svg</title>
+
+    <script src="snap.svg.js"></script>
+</head>
+<body>
+    test
+    <!-- <svg id="svg" style="width:300px;height:300px;"></svg> -->
+    <svg id="svg" style="width:300px;height:300px;"></svg>
+
+
+<script>
+    // cd fichier readme.md dans Snap.svg-0.5.1
+    var s = Snap("#svg");
+    // Lets create big circle in the middle:
+    var bigCircle = s.circle(150, 150, 100);
+    // By default its black, lets change its attributes
+    bigCircle.attr({
+        fill: "#bada55",
+        stroke: "#000",
+        strokeWidth: 5
+    });
+    // Now lets create another small circle:
+    //var smallCircle = s.circle(100, 150, 70);
+    // Lets put this small circle and another one into a group:
+    //var discs = s.group(smallCircle, s.circle(200, 150, 70));
+</script>
+
+
+</body>
+</html>

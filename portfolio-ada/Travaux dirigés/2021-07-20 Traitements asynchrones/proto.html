@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Utiliser des API</title>
+</head>
+
+<body>
+ <img src="" id="image" width="300px">
+<script>
+
+let promise= function () {
+    return new Promise(function(resolve,reject){
+        var debut = new Date().getTime();
+    setTimeout(() =>resolve(debut));
+    setTimeout(() =>reject("the code isn't correct")) 
+};
+    // var fin = new Date().getTime()
+}
+
+job()
+ .then(promise=> {
+    var fin = new Date().getTime()
+     console.log(fin_debut,"msec")
+    return promise;
+  })
+  .catch(function(error) {
+    return error;
+  });
+</script>
+</body>
+</html>

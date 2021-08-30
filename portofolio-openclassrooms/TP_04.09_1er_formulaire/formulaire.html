@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="CV.css"/>
+    <title>Formulaire</title>
+</head>
+
+<body>
+	<form method="post" action=""> 
+	   <fieldset>
+	       <legend>test</legend> <!-- Titre du fieldset --> 
+	       <label for="mail">Votre mail </label> 
+	   	   <input type="email" name="mail" id="mail" rows="10" cols="50" placeholder="email"/>
+			</br>
+	       <label for="age">Votre âge</label> 
+	   	   <input type="range" min="1" max="99" name="age" id="age" rows="20" cols="25" step="5" placeholder="âge"/>
+		</fieldset>
+	</form>
+
+	<form method="post" action=""> 
+	   <p>
+	       <label for="couleur">Votre couleur</label> 
+	   	   <input type="color" id="couleur" placeholder="couleur"/>
+	   </p>
+	</form>
+
+	<form method="post" action=""> 
+	   <p>
+	       <label for="test">Test</label> 
+	   	   <input type="month" id="test" placeholder="semaine"/>
+	   </p>
+	</form>
+
+	<form method="post" action=""> 
+	   <p>
+	       <label for="test">Test2</label> 
+	   	   <input type="search" id="test" placeholder="recherche"/>
+	   </p>
+	</form>
+
+	<form method="post" action=""> 
+	   <p>
+	   	   <input type="checkbox" name="option1" id="option1"/>
+	   	   <label for="option1">option 1</label>
+	   	   <br/>
+		   <input type="checkbox" name="option2" id="option2" checked/>
+	   	   <label for="option2">option 2</label>
+	   </p>
+	</form>	
+
+	<form method="post" action=""> 
+	   <p>
+	   	   <input type="radio" name="r_option" id="r_option1"/>
+	   	   <label for="r_option1">option 1</label>
+	   	   <br/>
+		   <input type="radio" name="r_option" id="r_option2" checked/>
+	   	   <label for="r_option2">option 2</label>
+	   </p>
+	</form>	
+
+</body>
+</html>

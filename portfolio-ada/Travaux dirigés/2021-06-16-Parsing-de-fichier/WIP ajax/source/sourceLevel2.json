@@ -1,0 +1,22 @@
+[
+{
+  "species": "Dog",
+  "breed": "Labrador Retriever",
+  "age": 6,
+  "traits": {
+    "eyeColor": "brown",
+    "coatColor": "yellow",
+    "weight": "137lbs"
+  }
+},
+{
+  "species": "Dog",
+  "breed": "Loulou",
+  "age": 4,
+  "traits": {
+    "eyeColor": "black",
+    "coatColor": "orange",
+    "weight": "5lbs"
+  }
+}
+]

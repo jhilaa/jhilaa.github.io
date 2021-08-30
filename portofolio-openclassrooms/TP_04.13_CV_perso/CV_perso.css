@@ -1,0 +1,232 @@
+@font-face 
+{
+    font-family: 'droid_sansregular';
+    src: url('DroidSans-webfont.eot');
+    src: url('DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('DroidSans-webfont.woff') format('woff'),
+         url('DroidSans-webfont.ttf') format('truetype'),
+         url('DroidSans-webfont.svg#droid_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body
+{
+    color: black;
+    font-family: droid_sansregular;
+    font-style: normal;
+}
+
+#bloc_page
+{
+    border: 0px solid red;
+    width: 1000px;
+    margin-left: 20px; 
+}
+
+#contenu
+{
+    border: 0px solid green;
+}
+
+/**** EN-TETE ************************/
+#header
+{
+    border: 0px solid blue;
+    background-color: #595959;
+    height: 95px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+/**** nom et expérience **********/
+#header_gauche
+{
+    /** pour centrer verticalement *******/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*****************/
+    border: 0px solid red;
+    height: 95px;
+    margin: auto;
+    padding-left: 15px;
+    text-align: left;
+    line-height: 11px;
+    flex: 1;
+}
+
+#header_gauche h1
+{
+    font-size: 1.2em;
+}
+
+#header_gauche h2
+{
+    font-size: 0.9em;
+}
+
+/**** adresse **********/
+#header_droite
+{
+    /** pour centrer verticalement ******/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*****************/
+    border: 0px solid green;
+    height: 95px;
+    margin: auto;
+    padding-right: 15px;
+    text-align: right;
+    line-height: 0px;
+    flex: 1;
+}
+
+#header_droite p
+{
+    font-size: 0.9em;
+}
+
+/** TITRE ******************************/
+#titre
+{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    height: 58px;
+    border:  0px dotted black;
+    /** pour centrer verticalement *******/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#titre h1
+{
+    color: black;
+}
+
+/*** SECTIONS ***********************/
+#competences, #missions, #outils_environnement, #formations_et_activites
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+#competences
+{
+    border-top: 4px solid #1AABE2;
+}
+
+#missions
+{
+    border-top: 4px solid #B11A2E;
+}
+
+#outils_environnement
+{
+    border-top: 4px solid #595959;
+}
+
+#formations_et_activites
+{
+    border-top: 4px solid #192E67;
+}
+
+/*** EN-TETE DE SECTION ***********************/
+#competences_header, #missions_header, #outils_environnement_header
+{
+    border: 0px dotted red;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+#competences_header h1, #missions_header h1, #outils_environnement_header h1
+{
+    padding-left: 15px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+#competences_header img, #missions_header img, #outils_environnement_header img
+{
+    text-align: center;
+    padding-left: 30px;
+}
+
+#competences_header h1
+{
+    border-left: 15px solid #1AABE2;
+    margin: auto;
+}
+
+#missions_header h1
+{
+    border-left: 15px solid #B11A2E;
+}
+
+#outils_environnement_header h1
+{
+    border-left: 15px solid #595959;
+}
+
+#formation_header h1
+{
+    border-left: 15px solid blue;
+}
+
+#activites_header h1
+{
+    border-left: 15px solid orange;
+}
+
+/*** BLOCS ***********************/
+#competences_bloc, #missions_bloc, #outils_environnement_bloc
+{
+    border: 0px dotted black;
+    width: 100%;
+    display: flex;
+    width: 750px;
+    /****/
+    /*justify-content: space-around;*/
+}
+
+#competences_bloc, #outils_environnement_bloc
+{
+    flex-direction: row;
+}
+
+#missions_bloc
+{
+    flex-direction: column;
+}
+
+
+/*** BLOC COMPETENCES ****************/
+
+#competences_bloc section, #outils_environnement_bloc section
+{
+    padding-left: 1em;
+    flex: 1;
+}
+
+/*** BLOC MISSIONS ****************/
+#missions_liste
+{
+    border: 0px dotted black;
+    column-count: 2;
+    justify-content: center;
+}
+
+#missions_liste .annee
+{
+    color: #B11A2E;
+}
+
+
+/*** BLOC OUTILS ET ENVIRONNEMENTS *******/

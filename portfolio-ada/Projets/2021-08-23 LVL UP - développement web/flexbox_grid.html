@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="flexbox">
+        <div id="ligneFB1" class="ligneFB">
+            <div class="element" style="background-color: orange;"></div>
+            <div class="element" style="background-color: blueviolet;"></div>
+        </div>
+        <div id="ligneFB2" class="ligneFB">
+            <div class="element" style="background-color: crimson"></div>
+            <div class="element" style="background-color: green"></div>
+            <div class="element" style="background-color: darkturquoise"></div>
+        </div>
+    </div>
+
+    <style>
+        .flexbox {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 500px;
+            border: black dotted 1px;
+        }
+
+        .ligneFB {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flexbox .element {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+        }
+    </style>
+    <!--===================-->
+    <div class="grid">
+        <div class="element" id="e1" style="background-color: orange;"></div>
+        <div class="element" id="e2" style="background-color: blueviolet;"></div>
+        <div class="element" id="e3" style="background-color: crimson"></div>
+        <div class="element" id="e4" style="background-color: green"></div>
+        <div class="element" id="e5" style="background-color: darkturquoise"></div>
+    </div>
+
+    <style>
+        #e1x {
+            grid-area: e1x;
+        }
+
+        #e2 {
+            grid-area: e2;
+        }
+
+        .grid {
+            display: grid;
+            border: black dotted 1px;
+            width: 500px;
+            grid-template-columns: 22% auto;
+            grid-template-rows: 22% auto 22%;
+        }
+
+        .grid .element {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+        }
+    </style>
+
+
+</body>
+
+</html>

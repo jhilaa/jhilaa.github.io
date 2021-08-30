@@ -1,0 +1,34 @@
+.intro /* classe de la balise */
+{
+    color: blue;
+}
+
+#id1 /* id de la balise */
+{
+	color: red;
+}
+
+#id2, #id3
+{
+	color: green;
+}
+
+#id4 #id5 /* sans la virgule, ça veut dire id5 contenu dans id4 */
+{
+	color: #ffa500 ;
+}
+
+.exemple1 /* test avec une balise span*/
+{
+	color: #d2b48c ;
+}
+
+.exemple2
+{
+	color: blue ;
+}
+
+a[title*="ple3"] /*l'attrubut titre contient "ple3"*/
+{
+		color: red ;
+}

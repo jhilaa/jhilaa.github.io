@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<script>, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+
+        const width = 1024, height = 550;
+        const path = d3.geoPath();
+        //autre style de projection, pour l'exemple
+        //const projection = d3.geoConicConformal()
+        //const projection = d3.geoEquirectangular()
+        const projection = d3.geoMercator()
+            .center([2.454071, 46.279229])
+            .scale(130)
+            .translate([width / 2, height / 2]);
+        path.projection(projection);
+
+        const svg = d3.select('#map').append("svg")
+            .attr("id", "svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const pays = svg.append("g");
+        const eqGroup = svg.append("g")
+            .attr("class", "earthquake");
+
+        //dessin de la carte du monde à partir du fichier json
+        d3.json('custom.geo.json').then(function (geojson) {
+            pays.selectAll("path")
+                .data(geojson.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+        });
+
+        //tentative de coloration du pays où il y a un tremblement de terre
+        //.style("fill", d3.geoContains(this.path, [2.454071, 46.279229]) ? "red" : "blue");
+        d3.json('json').then(function (geojson) {
+            var r = 50  //radius(earthquakeMonth[i].properties.mag);
+            var p = projection([-65.5, -55.2]);
+            var circle = eqGroup.append("circle")
+                .attr("r", 1)
+                .attr("id", "s")// + earthquakeMonth[i].properties.id)
+                //.style("fill", color(earthquakeMonth[i].properties.mag))
+                .style("opacity", 0.7)
+                //.style("z-index", Math.floor(10 - earthquakeMonth[i].properties.mag))
+                .attr("transform", "translate(" + p + ")");
+
+            circle.transition()
+                .duration(2000)
+                .attr("r", r)
+                .remove();
+        })
+
+        //countries = topojson.feature(world, world.objects.countries).features
+
+    </script>
+</body>
+
+<style>
+
+</style>
+
+</html>

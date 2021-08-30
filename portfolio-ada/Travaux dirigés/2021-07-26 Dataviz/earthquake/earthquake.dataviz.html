@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Tremblements de terre depuis 1900</title>
+
+    <link rel="stylesheet" href="../../assets/css/font-awesome-4.6.1/css/font-awesome.min.css">
+
+    <script src="../../assets/lib/jquery-3.2.1.min.js"></script>
+    <script src="./lib/colorbrewer.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+    <style type="text/css">
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            min-width: 100%;
+            background-color: #111111;
+            font-family: "Lato", Helvetica, sans-serif;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+            text-shadow: 1px 1px 1px #111;
+            color: #ccc;
+        }
+
+        #ekseoverlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: #000;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+        }
+
+        #ekseloading {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -28px 0 0 -25px;
+        }
+
+        #year {
+            position: absolute;
+            left: 20px;
+            top: 80px;
+            font-size: 30px;
+        }
+
+        #countSpan {
+            padding-left: 70px;
+        }
+
+        #control {
+            position: absolute;
+            left: 20px;
+            top: 110px;
+        }
+
+        #speed {
+            position: absolute;
+            left: 20px;
+            top: 170px;
+            font-size: 15px;
+        }
+
+        #control span {
+            border: 0.04em solid #ccc;
+            border-radius: 0.2em;
+            margin-right: 5px;
+            cursor: pointer;
+            cursor: hand;
+        }
+
+        #svgline {
+            z-index: 2;
+            position: absolute;
+            left: 20px;
+            top: 180px;
+        }
+
+        .axis path,
+        .axis line,
+        .horizontalFollowingLine {
+            fill: none;
+            stroke-width: 1px;
+            stroke: #ccc;
+            shape-rendering: crispEdges;
+        }
+
+        .verticalGrid {
+            fill: none;
+            stroke: #333;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+
+        .countries {
+            fill: #999;
+            stroke: grey;
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
+            z-index: 1;
+        }
+
+        #svg {
+            display: block;
+            background: #111111;
+            position: fixed;
+        }
+
+        #circle-legend {
+            display: none;
+            z-index: 2;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        #circle-legend rect {
+            stroke: #333;
+        }
+
+        #circle-legend circle {
+            stroke: #ccc;
+            stroke-width: 1;
+        }
+
+        #circle-legend text {
+            fill: #ccc;
+            font-family: Lato;
+            font-size: 10px;
+            text-shadow: 1px 1px 1px #111;
+        }
+
+        div.tooltip {
+            position: absolute;
+            opacity: 0.8;
+            z-index: 1000;
+            text-align: left;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            padding: 8px;
+            background-color: #000;
+            max-width: 500px;
+            height: 40px;
+        }
+
+        #backLink {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:100%;">
+        <h1 style="text-align:center; margin: 0;">Tremblements de terre depuis 1900 de magnitude supérieure à 6</h1>
+    </div>
+    <div id="map"></div>
+    <div id="scatterplot"></div>
+    <div id="year">
+        <span id="yearSpan"><span style="font-size: 15px;">(appuyer sur play)</span></span>
+        <span id="countSpan"></span>
+    </div>
+    <div id="control">
+        <p>
+            <span id="lower" style="display:inline-block;" class="fa fa-backward fa-2x fa-border"></span>
+            <span id="start" style="display:inline-block;" class="fa fa-play fa-2x fa-border"></span>
+            <span id="pause" style="display:inline-block;" class="fa fa-pause fa-2x fa-border"></span>
+            <span id="faster" style="display:inline-block;" class="fa fa-forward fa-2x fa-border"></span>
+            <span id="restart" style="display:inline-block;" class="fa fa-refresh fa-2x fa-border"></span>
+        </p>
+    </div>
+    <div id="speed"><span id="speedSpan"></span></div>
+    <div id="circle-legend" style="display: block;"></div>
+    <div id="ekseoverlay">
+        <img id="ekseloading" src="../../assets/img/ajax-loader.gif"></img>
+    </div>
+    <div id="backLink"><a href="../../index.php?page=earthquake" target="_blank" style="color: #3498db;">Information &
+            Détails techniques</a></div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var width = document.body.width,
+        height = document.body.height;
+
+    // Create the DIV that will contain all our SVG elements
+    var svg = d3.select('#map').append("svg")
+        .attr("id", "svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Define projection property (scale and translation are evaluated later)
+    var projection = d3.geo.mercator()
+        .scale(1)
+        .translate([0, 0]);
+
+    // And a path linked to it
+    var path = d3.geo.path()
+        .pointRadius(2)
+        .projection(projection);
+
+    // Define a radius scale and a color for earthquake and circle legend
+    var radius = d3.scale.linear()
+        .domain([6, 10])
+        .range([5, width * 60 / 1600]); // for width = 1600, range is [5, 60]
+    var color = d3.scale.quantize()
+        .domain([6, 10])
+        //.range(colorbrewer.YlOrRd[9]);  RdYlBu
+        .range(colorbrewer.RdYlBu[9]);
+    var dateFormat = d3.time.format.utc("%d-%m-%Y");
+    var monthFormat = d3.time.format.utc("%m/%Y");
+
+    var cGroup = svg.append("g")
+        .attr("class", "countries");
+    var eqGroup = svg.append("g")
+        .attr("class", "earthquake");
+
+    var countries;
+    var earthquakeByMonth = {};
+    var earthquakes8plus = [];
+    function ready(error, cs, eqs) {
+        earthquakeByMonth["01/1900"] = [];
+        eqs.features.forEach(function (d) {
+            d.properties.mag = +d.properties.title.substring(2, 5);
+            d.properties.date = new Date(+d.properties.time);
+            var month = monthFormat(d.properties.date);
+            if (earthquakeByMonth[month] === undefined) {
+                earthquakeByMonth[month] = [];
+            }
+            if (d.properties.mag > 8) {
+                earthquakes8plus.push(d);
+            }
+            earthquakeByMonth[month].push(d);
+        });
+        countries = cs;
+        drawWorldMap();
+        addCircleLegend();
+        addScatterplotChart();
+
+        // Remove loading overlay
+        $('#ekseoverlay').remove();
+    }
+
+    function drawWorldMap() {
+        var b = path.bounds(countries),
+            s = .85 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+            t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+        projection
+            .scale(s)
+            .translate(t);
+
+        cGroup.selectAll("path")
+            .data(countries.features)
+            .enter()
+            .append("path")
+            .attr("d", path);
+    }
+
+    function addCircleLegend() {
+        var container = d3.select("#circle-legend");
+        var circleLegendwidth = 300,
+            circleLegendheight = 300;
+
+        var entries = [6, 7, 8, 9, 10];
+
+        var svgLegend = container.append("svg")
+            .attr("width", circleLegendwidth)
+            .attr("height", circleLegendheight)
+            .attr("transform", "translate(0, 40)");
+
+        var g = svgLegend.append("g")
+            .attr("class", "circle-legend");
+
+        var itemEnter = g.selectAll("g.item")
+            .data(entries)
+            .enter()
+            .append("g")
+            .attr("class", "item")
+            .attr("transform", function (d) { return "translate(0," + (radius(10) * 2 - 2 * (radiusd) + 10) + ")"; });
+
+        itemEnter.append("rect")
+            .attr("x", 130)
+            .attr("width", 130)
+            .attr("height", 1)
+            .text(function (d) { return d; });
+
+        itemEnter.append("circle")
+            .attr("cx", 130)
+            .attr("cy", function (d) { return radius(d); })
+            .attr("r", function (d) { return radius(d); })
+            .attr("fill", "none")
+            .style("stroke", function (d) { return color(d); })
+            .style("stroke-width", "1.5px");
+
+        itemEnter.append("text")
+            .attr("x", 255)
+            .text(function (d) { return d });
+    }
+
+    var horizontalFollowingLine;
+    var y;
+    function addScatterplotChart() {
+        var scatterplotSVGWidth = 250,
+            scatterplotSVGHeight = height - 200,
+            scatterplotWidth = scatterplotSVGWidth - 80,
+            scatterplotHeight = scatterplotSVGHeight - 40;
+
+        var x = d3.scale.linear()
+            .range([0, scatterplotWidth])
+            .domain([8, 9.8]); // 9.6 : max earthquake
+
+        y = d3.time.scale()
+            .range([0, scatterplotHeight])
+            .domain([new Date(1900, 0, 0), new Date(2020, 10, 19)]);
+
+        var xAxis = d3.svg.axis()
+            .tickFormat(d3.format("d"))
+            .scale(x)
+            .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
+
+        var line = d3.svg.line()
+            .x(function (d) { return x(d.properties.mag); })
+            .y(function (d) { return y(d.properties.date); });
+
+        var scatterplotSvg = d3.select("#scatterplot").append("svg")
+            .attr("id", "svgline")
+            .attr("width", scatterplotSVGWidth)
+            .attr("height", scatterplotSVGHeight)
+            .attr("transform", "translate(50, 20)");
+
+        scatterplotSvg.append("g")
+            .attr("class", "x axis")
+            .style("fill", "#ccc")
+            .attr("transform", "translate(10," + scatterplotHeight + ")")
+            .call(xAxis);
+
+        scatterplotSvg.append("g")
+            .attr("class", "y axis")
+            .style("fill", "#ccc")
+            .call(yAxis);
+
+        scatterplotSvg.selectAll("x axis").data(x.ticks(8)).enter()
+            .append("line")
+            .attr("class", "verticalGrid")
+            .attr("x1", function (d) { return x(d); })
+            .attr("x2", function (d) { return x(d); })
+            .attr("y1", 0)
+            .attr("y2", scatterplotHeight);
+
+        // Append a DIV for the tooltip
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        scatterplotSvg.selectAll("dot")
+            .data(earthquakes8plus)
+            .enter().append("circle")
+            .attr("class", "dot")
+            .attr("r", 4)
+            .attr("cx", function (d) { return x(d.properties.mag); })
+            .attr("cy", function (d) { return y(d.properties.date); })
+            .style("fill", function (d) { return color(d.properties.mag); })
+            .on("mouseover", function (d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html("<b>Date : </b>" + d.properties.date + "<br>"
+                    + "<b>Info : </b>" + d.properties.title)
+                    .style("left", (d3.event.pageX + 30) + "px")
+                    .style("top", (d3.event.pageY - 30) + "px");
+            })
+            .on("mouseout", function (d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                div.html("")
+                    .style("left", "0px")
+                    .style("top", "0px");
+            });
+
+        horizontalFollowingLine = scatterplotSvg.append("line")
+            .attr("class", "horizontalFollowingLine")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", scatterplotWidth)
+            .attr("y2", 0);
+    }
+
+    var monthAnimation = (function () {
+        var anim = {};
+        var timerId = null;
+        var interval = 200;
+        var playing = false;
+        var monthInterval = getMonthInterval();
+        var iMonth = 0;
+        var iCount = 0;
+
+        var stop = function () {
+            if (timerId !== null) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        };
+
+        var start = function () {
+            if (timerId === null) {
+                timerId = setInterval(function () {
+                    if (iMonth > monthInterval.length - 1) {
+                        anim.stop();
+                    }
+                    var monthYear = monthInterval[iMonth]; // MM/YYYY
+                    var earthquakeMonth = earthquakeByMonth[monthYear];
+                    var splitDate = monthYear.split("/");
+                    var date = new Date(splitDate[1], splitDate[0] - 1, 0);
+                    // Update following line with current month/year
+                    horizontalFollowingLine.attr("y1", y(date));
+                    horizontalFollowingLine.attr("y2", y(date));
+                    d3.select('#yearSpan').text(monthYear);
+                    if (earthquakeMonth !== undefined && earthquakeMonth.length !== 0) {
+                        iCount = iCount + earthquakeMonth.length;
+                        d3.select('#countSpan').text(iCount);
+                        transition(earthquakeMonth);
+                    }
+                    iMonth++;
+                }, interval);
+            }
+        };
+
+        anim.lower = function () {
+            interval += 50;
+            d3.select('#speedSpan').text("Vitesse : " + interval + " ms par mois");
+            stop();
+            playing = true;
+            start();
+            return anim;
+        }
+
+        anim.start = function () {
+            if (playing == true) {
+                return anim;
+            }
+            playing = true;
+            start();
+            return anim;
+        }
+
+        anim.pause = function () {
+            if (playing == false) {
+                return anim;
+            }
+            playing = false;
+            stop();
+            return anim;
+        }
+
+        anim.faster = function () {
+            if (interval <= 0) {
+                interval = 0;
+                d3.select('#speedSpan').text("Vitesse : " + interval + " ms par mois (pas mieux)");
+                return anim;
+            }
+            interval -= 50;
+            d3.select('#speedSpan').text("Vitesse : " + interval + " ms par mois");
+            stop();
+            playing = true;
+            start();
+            return anim;
+        }
+
+        anim.restart = function () {
+            iMonth = 0;
+            iCount = 0;
+            d3.select('#countSpan').text("");
+            stop();
+            playing = true;
+            start();
+            return anim;
+        }
+
+        return anim;
+    })();
+
+    /*
+    $("#lower").click(function () {
+        monthAnimation.lower();
+    });
+
+    $("#start").click(function () {
+        monthAnimation.start();
+    });
+
+    $("#pause").click(function () {
+        monthAnimation.pause();
+    });
+
+    $("#faster").click(function () {
+        monthAnimation.faster();
+    });
+
+    $("#restart").click(function () {
+        monthAnimation.restart();
+    });
+    */
+
+    queue().defer(d3.json, "world-countries-no-antartica.json")
+        .defer(d3.json, "from1901to2020.json")
+        .await(ready);
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    function transition(earthquakeMonth) {
+        for (var i = 0; i < earthquakeMonth.length; i++) {
+            var r = radius(earthquakeMonth[i].properties.mag);
+            var p = projection([earthquakeMonth[i].geometry.coordinates[0], earthquakeMonth[i].geometry.coordinates[1]]);
+            var circle = eqGroup.append("circle")
+                .attr("r", 1)
+                .attr("id", "s" + earthquakeMonth[i].properties.id)
+                .style("fill", color(earthquakeMonth[i].properties.mag))
+                .style("opacity", 0.7)
+                .style("z-index", Math.floor(10 - earthquakeMonth[i].properties.mag))
+                .attr("transform", "translate(" + p + ")");
+
+            circle.transition()
+                .duration(2000)
+                .attr("r", r)
+                .remove();
+
+            if (earthquakeMonth[i].properties.mag > 8) {
+                var line = eqGroup.append("line")
+                    .attr("x1", 0)
+                    .attr("y1", 0)
+                    .attr("x2", -r)
+                    .attr("y2", -r)
+                    .style("stroke", "white")
+                    .style("stroke-width", "2")
+                    .attr("transform", "translate(" + p + ")");
+
+                var text = eqGroup.append("text")
+                    .style("z-index", 7)
+                    .style("fill", "white")
+                    .attr("transform", "translate(" + [p[0] - r, p[1] - r - 5] + ")")
+                    .text(dateFormat(earthquakeMonth[i].properties.date) + " - " + earthquakeMonth[i].properties.title);
+
+                line.transition()
+                    .duration(10000)
+                    .style("opacity", 0)
+                    .remove();
+
+                text.transition()
+                    .duration(10000)
+                    .style("opacity", 0)
+                    .remove();
+            }
+        }
+    }
+
+    function getMonthInterval() {
+        var res = [];
+        for (var jdx = 1900; jdx < 2021; jdx++) {
+            for (var idx = 1; idx < 12; idx++) {
+                res.push((idx < 10 ? "0" + idx.toString() : idx.toString()) + "/" + jdx.toString());
+            }
+        }
+        return res;
+    }
+
+	//  $(window).resize(function() {
+    //currentWidth = $("#map").width();
+    //svg.attr("width", currentWidth);
+    //svg.attr("height", currentWidth * height / width);
+	//});
+</script>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-73302929-1', 'auto');
+    ga('send', 'pageview');
+</script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="TP6_display_flex_et_justify-content_synthèse.css" />
+        <title>Flexbox</title>
+    </head>
+
+    <body>
+        <p>Attributs css du cadre noir</p>
+        <p style="display:flex; flex-direction:row;">
+             <form>
+                <div>flex-direction</div>
+                <select name ="flex-direction" id="flex-direction">
+                    <option value="row" selected>row</option>
+                    <option value="column">column</option>
+                </select>
+                <div>justify-content</div>
+                <select name ="justify-content" id="justify-content">
+                    <option value="flex-start" selected>flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="center">center</option>
+                    <option value="space-between">space-between</option>
+                    <option value="space-around">space-around</option>
+                </select>
+                <!---------------------->
+                <div>align-items</div>
+                <select name ="align-items" id="align-items">
+                    <option value="stretch" selected>stretch</option>
+                    <option value="flex-start">flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="center">center</option>
+                    <option value="space-around">baseline</option>
+                </select>
+            </form>
+        </p>
+        <div id= "conteneur" class="conteneur">
+            <div class="element"></div>
+            <div class="element"></div>
+            <div class="element"></div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        console.log("test 0");
+        let eltConteneur = document.getElementById("conteneur");
+        let eltFlexDirection = document.getElementById("flex-direction")
+        let eltJustifyContent = document.getElementById("justify-content");
+        let eltAlignItems = document.getElementById("align-items"); 
+
+        function maj() {
+        	eltConteneur.style.flexDirection = eltFlexDirection.value
+            eltConteneur.style.justifyContent = eltJustifyContent.value
+            eltConteneur.style.alignItems = eltAlignItems.value
+        }
+
+        eltFlexDirection.addEventListener("change", maj);
+        eltJustifyContent.addEventListener("change", maj);
+        eltAlignItems.addEventListener("change", maj);
+    
+    </script>
+
+</html>

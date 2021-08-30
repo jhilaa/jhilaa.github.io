@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<script>, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
+
+    <!-- <script type="text/javascript" src="C:\Users\julie\node_modules\d3\dist\d3.js"></script>  -->
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+        const width = 550, height = 550;
+        const path = d3.geoPath();
+        const projection = d3.geoConicConformal()
+            .center([2.454071, 46.279229])
+            .scale(2600)
+            .translate([width / 2, height / 2]);
+
+        path.projection(projection);
+
+        const svg = d3.select('#map').append("svg")
+            .attr("id", "svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const deps = svg.append("g");
+
+        d3.json('departments.json').then(function (geojson) {
+            deps.selectAll("path")
+                .data(geojson.features)
+                .enter()
+                .append("path")
+                .attr('class', 'department')
+                .attr("d", path)
+                .on("mouseover", function (path) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html("Département : " + path.target.__data__.properties.NOM_DEPT + "<br/>"
+                        + "Région : " + path.target.__data__.properties.NOM_REGION)
+                        .style("left", (path.target.pageX + 30) + "px")
+                        .style("top", (path.target.pageY - 30) + "px")
+                        .style("left", "30px")
+                        .style("top", "30px")
+                })
+                .on("mouseout", function (d) {
+                    div.style("opacity", 0);
+                    div.html("")
+                        .style("left", "-500px")
+                        .style("top", "-500px");
+                });
+        });
+
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+    </script>
+
+    <style>
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            color: black;
+            width: 275px;
+            height: 37px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: grey;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+    </style>
+</body>
+
+</html>

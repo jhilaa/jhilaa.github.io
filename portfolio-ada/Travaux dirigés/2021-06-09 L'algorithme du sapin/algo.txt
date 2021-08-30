@@ -1,0 +1,46 @@
+
+                       + 
+etage 1               /*\ 13 espaces 1 slash 1 étoile 1 antislash
+etage 2              /***\ 12 espaces 1 slash 3 étoiles 1 antislash
+etage 3             /*****\ 11 espaces 1 slash 5 étoiles 1 antislash
+etage 4            /*******\ 10 espaces 1 slash 7 étoiles 1 antislash
+etage 5           /*********\ 9 espaces 1 slash 9 étoiles 1 antislash
+etage 6          /***********\ 8 espaces 1 slash 11 étoiles 1 antislash
+etage 7         /*************\ 7 espaces 1 slash 13 étoiles 1 antislash
+etage 8        /***************\ 6 espaces 1 slash 15 étoiles 1 antislash
+etage 9       /*****************\ 5 espaces 1 slash 17 étoiles 1 antislash
+etage 10     /*******************\ 4 espaces 1 slash 19 étoiles 1 antislash
+etage 11    /*********************\ 3 espaces 1 slash 21 étoiles 1 antislash
+etage 12   /***********************\ 2 espaces 1 slash 23 étoiles 1 antislash
+etage 13  /*************************\ 1 espace 1 slash 25 étoiles 1 antislash
+etage 14 /***************************\ 0 espaces 1 slash 27 étoiles 1 antislash
+                       +
+etage 1               /*\ 9 espaces 1 slash 1 étoile 1 antislash (9 = 13-4)
+etage 2              /***\ 8 espaces 1 slash 3 étoiles 1 antislash (8 = 12-4)
+etage 3              /***\ 8 espaces 1 slash 3 étoiles 1 antislash (8 = 11-3)
+etage 4             /*****\ 7 espaces 1 slash 5 étoiles 1 antislash (7 = 10-3)
+etage 5            /*******\ 6 espaces 1 slash 7 étoiles 1 antislash (6 = 9-3)
+etage 6            /*******\ 6 espaces 1 slash 7 étoiles 1 antislash (6 = 8-2)
+etage 7           /*********\ 5 espaces 1 slash 9 étoiles 1 antislash (5 = 7-2)
+etage 8          /***********\ 4 espaces 1 slash 11 étoiles 1 antislash (4 = 6-2)
+etage 9          /***********\ 4 espaces 1 slash 11 étoiles 1 antislash (4 = 5-1)
+etage 10        /*************\ 3 espaces 1 slash 13 étoiles 1 antislash (3 = 4-1)
+etage 11       /***************\ 2 espaces 1 slash 15 étoiles 1 antislash (2 = 3-1)
+etage 12       /***************\ 2 espaces 1 slash 15 étoiles 1 antislash (2 = 2-0)
+etage 13      /*****************\ 1 espace 1 slash 17 étoiles 1 antislash (1 = 1-0)
+etage 14     /*******************\ 0 espace 1 slash 19 étoiles 1 antislash (0 = 0-0)
+              +
+             /*\
+            /***\
+            /***\
+           /*o***\
+          /*o*****\
+          /*o+****\
+         /**o******\
+        /***********\
+        /*********o*\
+       /**o***o+**o+*\
+      /***********o***\
+      /**o********+o**\
+     /*o*+o*+***+******\
+  

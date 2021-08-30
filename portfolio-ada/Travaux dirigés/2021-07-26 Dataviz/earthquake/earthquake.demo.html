@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/queue.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Tremblements de terre depuis 1900</title>
+
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+
+	</style>
+</head>
+
+<body>
+</body>
+
+</html>
+<script type="text/javascript">
+	var projection = d3.geo.mercator()
+		.scale(1)
+		.translate([0, 0]);
+
+	var path = d3.geo.path()
+		.pointRadius(2)
+		.projection(projection);
+
+	function drawWorldMap() {
+		var b = path.bounds(countries),
+			s = .85 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+			t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+		projection
+			.scale(s)
+			.translate(t);
+
+		cGroup.selectAll("path")
+			.data(countries.features)
+			.enter()
+			.append("path")
+			.attr("d", path);
+	}
+
+	var start = function () {
+		if (timerId === null) {
+			timerId = setInterval(function () {
+				if (iMonth > monthInterval.length - 1) {
+					anim.stop();
+				}
+				// Calcul du mois courant
+				// Appel de la fonction transition pour jouer les tremblements de terre du mois courant
+				// Mise à jour de la barre du graphique à gauche et du compteur de tremblements de terre
+				iMonth++;
+			}, interval);
+		}
+	};
+
+	var stop = function () {
+		if (timerId !== null) {
+			clearInterval(timerId);
+			timerId = null;
+		}
+	};
+
+	queue().defer(d3.json, "world-countries-no-antartica.json")
+		.defer(d3.json, "from1901to2020.json")
+		.await(ready);
+
+	function transition(earthquakeMonth) {
+		for (var i = 0; i < earthquakeMonth.length; i++) {
+			var r = radius(earthquakeMonth[i].properties.mag);
+			var p = projection([earthquakeMonth[i].geometry.coordinates[0], earthquakeMonth[i].geometry.coordinates[1]]);
+			var circle = eqGroup.append("circle")
+				.attr("r", 1)
+				.attr("id", "s" + earthquakeMonth[i].properties.id)
+				.style("fill", color(earthquakeMonth[i].properties.mag))
+				.style("opacity", 0.7)
+				.style("z-index", Math.floor(10 - earthquakeMonth[i].properties.mag))
+				.attr("transform", "translate(" + p + ")");
+
+			circle.transition()
+				.duration(2000)
+				.attr("r", r)
+				.remove();
+
+			// Gestion des tremblements de terre de magnitude supérieure à 8
+		}
+	}
+</script>

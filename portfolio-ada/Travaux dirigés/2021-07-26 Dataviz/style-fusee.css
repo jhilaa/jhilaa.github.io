@@ -1,0 +1,88 @@
+body {
+    background: linear-gradient(-180deg, #58151A, #BC2909, #BA6D09, #71A8EE, #3072EB, #1552C6, #0542A8);
+    background-size: 400% 400%;
+    animation : bg-animation 8s infinite alternate;
+}
+
+@keyframes bg-animation {
+	0% {
+		background-position: top;
+    }
+	100% {
+		background-position: bottom;
+	}
+}
+
+.moon_svg {
+	position: absolute;
+	vertical-align: bottom;
+	border: 2px, red, solid;
+	object-position: 75%;
+}
+
+.fusee {
+	position: absolute;
+	top: 0px;
+}
+
+#notif {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	width: 125px;
+	height: 60px;
+}
+
+#cloche {
+	position: absolute;
+	right: 20px;
+	max-width: 70px;
+	height: auto;
+	z-index: 1;
+	display: none;
+}
+
+#message {
+	position: absolute;
+	height: auto;
+	border: 1px lightgrey solid;
+	right: 35px;
+	top: 48px;
+	padding: 7px;
+	background: white;
+	border-radius: 1px;
+	width: intrinsic;
+	/* Safari/WebKit utilisent un nom non-standard */
+	width: -moz-max-content;
+	/* Firefox/Gecko */
+	width: -webkit-max-content;
+	/* Chrome */
+	z-index: 0;
+	display: none;
+	font-family: Monaco;
+	border-radius: 20px;
+}
+
+#message:hover {
+	cursor: pointer;
+}
+
+#popup {
+	position: absolute;
+	right: 55px;
+	top: 120px;
+	padding-left: 10px;
+	min-width: 400px;
+	min-height: 155px;
+	background-color: white;
+	display: none;
+	border-radius: 20px;
+	font-family: Monaco;
+}
+
+#Decompte {
+	position: absolute;
+	font-size: 210%;
+	font-style: bold;
+	font-family: Monaco;
+}

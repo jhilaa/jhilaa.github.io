@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ajouter un témoignage</title>
+</head>
+
+<body>
+    <h1>Ajouter un témoignage</h1>
+    <form>
+        <p>
+            <label for="pseudo">Pseudo</label> :
+            <input type="text" name="pseudo" id="pseudo" required>
+        </p>
+        <p> <div>Ce cours était :</div>
+            <div>
+                <input type="radio" name="evaluation" value ="1" id="Genial" checked>
+                <label for="Genial">Génial</label>
+            </div><div>
+                <input type="radio" name="evaluation" value ="2" id="TBien">
+                <label for="TBien">Très bien</label>
+            </div><div>
+                <input type="radio" name="evaluation" value ="3" id="PasMal">
+                <label for="PasMal">Pas mal</label>
+            </div><div>
+                <input type="radio" name="evaluation" value ="4" id="Bof">
+                <label for="Bof">Bof</label>
+            </div><div>
+                <input type="radio" name="evaluation" value ="5" id="Nul">
+                <label for="Nul">Nul</label>
+            </div>
+        </p>
+        <p>
+            <label for="message">Ajouter un message</label> :
+            <textarea style="display: block;" name="message" id="message" rows="5" cols="33" required></textarea>
+        </p>
+
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <p id="resultat"></p>
+
+    <script src="Envoi_de_données_au_serveur_form2_avec_formData_fct_ajaxPost.js"></script>
+    <script src="Envoi_de_données_au_serveur_form2_avec_formData_lct_ajaxPost.js"></script>
+</body>
+
+</html>

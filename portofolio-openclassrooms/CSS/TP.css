@@ -1,0 +1,50 @@
+body {
+	display: flex;
+	flex-direction: row;
+	width:  100%;
+	margin: 0px;
+}
+
+aside { 
+	flex: 1;
+	border: 0px black dotted;
+	background-image: linear-gradient(135deg, #F1D48E 0%, rgba(244,102,138,1) 100%);
+	/*background: #1F2227;*/
+	/*background-image: linear-gradient(135deg, #F1D48E 0%, rgba(244,102,138,1) 65%, rgba(241,212,142,1) 100%);*/
+	/*background-image: linear-gradient(135deg, #F1D48E 0%, rgba(244,102,138,1) 100%);*/
+}
+
+
+main { 
+	flex: 2;
+	border: 0px red dotted;
+}
+
+aside ul  {
+	list-style: none;
+}
+
+aside ul a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 1px 0px 1px 0px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-right: 5px;
+	color: white;
+	margin: 2px 0px 2px 0px;
+}
+
+aside ul a:hover {
+	background: white;
+	color: grey;
+	font-size: 1em;
+}
+
+aside ul a:hover:before {
+  content: "\25B6   ";
+  color: black;
+  font-size: 0.8em; 
+}
+
+

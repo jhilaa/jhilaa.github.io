@@ -1,0 +1,16 @@
+.etoile {
+ background:  #00A651   ;
+}
+
+.boule {
+  background-color: #FF6075;
+}
+
+.lumiere {
+  background-color : yellow;
+}
+
+#sapins {
+  display: flex;
+  flex-direction: row;
+}

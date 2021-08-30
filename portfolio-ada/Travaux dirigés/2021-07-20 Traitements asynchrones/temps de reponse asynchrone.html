@@ -1,0 +1,41 @@
+<!doctype html>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Temps de réponse</title>
+    </head>
+
+    <body>
+        <script>
+
+function attendre() {
+   await setTimeout(console.log("test"),50000);
+}
+
+ async function asyncMain() {
+  debut=new Date().getTime();
+  await attendre();
+  await fin=new Date().getTime();
+  await console.log(fin-debut);
+}
+
+asyncMain();
+
+// https://developer.mozilla.org/fr/docs/orphaned/Web/JavaScript/Reference/Statements/async_function
+async function getProcessedData(url) {
+  let v;
+  try {
+    v = await downloadData(url);
+  } catch(e) {
+    v = await downloadFallbackData(url);
+  }
+  return processDataInWorker(v);
+}
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Utiliser des API</title>
+</head>
+
+<body>
+ <img src="" id="image" width="300px">
+<script>
+    
+//const fetch = require("node-fetch");
+//var XMLHttpRequest = //require("xmlhttprequest").XMLHttpRequest;
+
+const fetch = require("node-fetch");
+
+var getCat = async () => {
+  var response = await fetch("https://api.thecatapi.com/v1/images/search?format=json");
+    if (response.status !== 200) {
+        throw new Error("Erreur");    
+      }
+var data = await response.json();
+return data;
+}
+
+getCat().then(data => console.log("resolved", data[0]["url"]))
+        .catch(err => console.log("rejected",err))
+
+
+
+</script>
+</body>
+</html>

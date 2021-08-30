@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fusée</title>
+    <script src="snap.svg.js"></script>
+    <script src="anime-master\lib\anime.min.js"></script>
+    <link rel="stylesheet" href="style-fusee.css">
+
+</head>
+
+<body>
+
+    <!-- CODE DE LA PAGE -->
+    <p id="Decompte">LA FUSÉE DÉCOLLERA DANS   <span id="countdown"> </span></p>
+    
+
+    <div id="notif"
+        onmouseleave="let msg=document.getElementById('message');msg.style.display='none';msg.style.zIndex=0;">
+        <img id="cloche" src="cloche.png"
+            onmouseover="let msg=document.getElementById('message');msg.style.display='block';msg.style.zIndex=2;" />
+
+        <div id="message" onclick="let msg=document.getElementById('popup');msg.style.display='block'" ;>
+            You have 1 new message
+        </div>
+    </div>
+
+    <div id="popup">
+        <p>Message from : Wall E</p>
+        <p>Subject : Feeling lonely on Mars ? Looking for HOT robots ?</p>
+        <h2><a href="mars-mission.html">Click here </a></h2>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        var countDownD = 6;
+    
+        var z = setInterval(function() {
+        var seconds = countDownD - 1;
+        document.getElementById("countdown").innerHTML = seconds + "s ";
+        countDownD = countDownD - 1;
+            if (seconds == 0) {
+            clearInterval(z);
+            document.getElementById("countdown").innerHTML = "";
+            launchAnimation();
+            document.getElementById("Decompte").innerHTML ="";
+             }
+        }, 1000);
+
+        //utilisation de la librairie snap svg
+        var s = Snap(1333, 1000);
+        var moon = s.circle(1200, 100, 80);
+        moon.attr({
+            fill: 'white',
+            stroke: 'grey',
+            strokeOpacity: .3,
+            strokeWidth: 10
+        });
+        moon.addClass("moon");
+
+        var g = s.g()
+        let x = 800;
+        let y = window.innerHeight;
+        var fusee = g.image("fusee.svg", x, y-250, 200, 200);
+        fusee.addClass("fusee");
+
+        
+
+        function launchAnimation() {
+            if (countDownD == 0) {
+                anime({                     //utilisation de la librairie anime.js
+                    targets: '.fusee',
+                    translateY: -1050,
+                    easing: 'easeInOutQuad',
+                    duration: 6500,
+                    // ajout pour lancer l'arrivée du message à la fin de l'animation
+                    complete: () => { msg = document.getElementById('cloche'); msg.style.display = 'block' }
+                    //complete: () => { console.log('none') }
+                })
+            }
+        };
+
+        launchAnimation();
+        
+
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Démo de la différence entre setInterval et requestAnimationFrame</title>
+    <!-----------------------------
+        The requestAnimationFrame method is used to sync animations with the screen updates. The screen updates at a specific rate, for example 60 times per second. If you sync your animation updates so that they occur at that rate, the animation will look smooth.
+
+        You can make the setInterval run more often to make it a bit smoother, but to make it support all different screens you would have to make it run faster than 120 times per second, which uses a lot more CPU than needed for most screens, and some browsers doesn't even support a rate that fast.
+
+        Here is an example, where anim1 runs at the rate of the screen, while anim2 runs at a fixed rate. If you run the demo, you see that the left square moves smoothly, while the right square jumps a bit in the movement.
+
+        Note some differences:
+
+        anim1 calls requestAnimationFrame to catch the next update.
+        anim1 gets a parameter to use for timing, while anim2 uses a counter.
+
+        Also, note that setInterval is supported in all browsers, but requestAnimationFrame is not. Internet Explorer 9 for example does not support it. If you plan to use it, it would be a good idea to check if it exists first, and use setInterval as a fallback.
+    ------------------------------->
+</head>
+
+<body>
+    <div id="a1" style ="position: absolute; width: 10px; height: 10px; background: black;"></div>
+    <div id="a2" style ="position: absolute; width: 10px; height: 10px; background: gray;"></div>
+
+    <!-- Mon code Javascript -------------------------- -->
+    <script type="text/javascript">
+        window.requestAnimationFrame(anim1);
+
+        window.setInterval(anim2, 25);
+
+        var a1 = document.getElementById('a1');
+        var a2 = document.getElementById('a2');
+        var t2 = 0;
+
+        function anim1(t1) {
+            a1.style.left = (50 + Math.cos(t1 / 500) * 30) + 'px';
+            a1.style.top = (50 + Math.sin(t1 / 500) * 30) + 'px';
+            window.requestAnimationFrame(anim1);
+        }
+
+        function anim2() {
+            a2.style.left = (100 + Math.cos(t2) * 30) + 'px';
+            a2.style.top = (50 + Math.sin(t2) * 30) + 'px';
+            t2 += 0.055;
+        }
+    </script>
+</body>
+
+</html>

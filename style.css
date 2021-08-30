@@ -35,7 +35,7 @@ body {
   padding: 0;
   font-family: helvetica, arial, tahoma, verdana;
   line-height: 20px;
-  font-size: 14px;
+  font-size: 16px; /*14px*/
   color: #726f77;
 }
 
@@ -47,6 +47,14 @@ a {
   text-decoration: none;
 }
 
+.liste1>li {
+  margin-bottom: 5px;
+}
+
+.liste1>li:first-child {
+  margin-top: -7px;
+}
+
 #container {
   max-width: 100%;
 }
@@ -55,6 +63,7 @@ a {
   color: inherit;
 	text-decoration: underline;
 	text-decoration-color:  var(--main-bg-color);
+  color: var(--main-bg-color);;
 }
 
 h1,
@@ -84,7 +93,7 @@ aside .presentation {
   color: var(--main-bg-color);
   float: left;
   font-family: "Dosis", arial, tahoma, verdana;
-  font-size: 22px;
+  font-size: 24px; /*22px*/
   font-weight: 500;
 }
 aside .presentation > span {
@@ -96,7 +105,7 @@ aside .social {
 }
 aside .social .btn {
   font-family: "Dosis";
-  font-size: 14px;
+  font-size: 16px; /*14px*/
   margin: 10px 5px;
 }
 
@@ -135,7 +144,6 @@ aside {
   top: 0;
   position: absolute;
   /******/
-  border: var(--debbug-border) blue dotted;
 }
 #timeline:after {
   content: "";
@@ -143,11 +151,11 @@ aside {
   display: table;
   width: 100%;
 }
+
 #timeline .timeline-item {
-  /*margin-bottom: 50px;*/
   margin-top: -100px;
   position: relative;
-  border: var(--debbug-border) gray dotted;
+  border: var(--debbug-border) magenta dotted;
 }
 
 #timeline :nth-child(1)  {
@@ -213,7 +221,7 @@ aside {
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  margin-bottom: 50px;
+  margin-bottom: -10px;
 }
 
 #timeline .timeline-item .timeline-content h2 {
@@ -246,7 +254,6 @@ aside {
   margin-top : 5px;
 }
 
-margin-bottm: 20pxo;
 #timeline .timeline-item .timeline-content.perso h2 {
   background: var(--perso-bg-color);
 }
@@ -256,7 +263,7 @@ margin-bottm: 20pxo;
 }
 
 
-#timeline .timeline-item .timeline-content:before {
+#timeline .timeline-item .timeline-content.left:before {
   content: "";
   position: absolute;
   left: 45%;
@@ -268,11 +275,26 @@ margin-bottm: 20pxo;
   border-left: 7px solid var(--main-bg-color);
 }
 
+
+#timeline .timeline-item .timeline-content.right:before {
+  content: "";
+  position: absolute;
+  right: 45%;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid var(--main-bg-color);
+}
+
+/*
 #timeline .timeline-item .timeline-content.perso:before {
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 7px solid var(--perso-bg-color) transparent;
 }
+*/
 
 #timeline .timeline-item .timeline-content.right {
   float: right;
@@ -282,16 +304,22 @@ margin-bottm: 20pxo;
   float: left;
 }
 
-#timeline .timeline-item .timeline-content.right:before {
+/*
+#timeline .timeline-item .timeline-content.right.h2.ALD:before {
   content: "";
   right: 45%;
   left: inherit;
   border-left: 0;
   border-right: 7px solid var(--main-bg-color);
 }
+*/
 
-#timeline .timeline-item .timeline-content.right.ALD:before {
-  border-right: 7px solid #c8c8c8;;
+#timeline .timeline-item .timeline-content.right.h2.ALD:before {
+  border-right: 7px solid blue ;/*#c8c8c8;*/
+}
+
+#timeline .timeline-item .timeline-content h2.ALD {
+  background: #c8c8c8;
 }
 
 .timeline-content h2 {
@@ -300,19 +328,52 @@ margin-bottm: 20pxo;
   justify-content: space-between;
 }
 
-#timeline .timeline-item .timeline-content.ALD h2 {
-  background: #c8c8c8;
-}
-
 .icons {
   display: flex; 
   flex-direction: row; /* direction d'affichage verticale */
   align-items:center; /* alignement vertical */
+  flex-wrap: wrap;
+  gap:5px;
 }
 
 .icon {
   height: 38px;
   width: auto;
+  margin-right: 8px;
+}
+
+.icon-small {
+  height: 19px;
+  width: auto;
+  margin-left : 15px;
+  margin-right: 15px;
+}
+
+.icon-medium {
+  height: 27px;
+  width: auto;
+  margin-left : 10px;
+  margin-right: 10px;
+}
+
+.icon-big {
+  height: 50px;
+  width: auto;
+  margin-left : 10px;
+  margin-right: 10px;
+}
+
+#exp-pro {
+  display: flex;
+  flex-direction: column;
+}
+
+#exp-pro .icons{
+  margin-bottom:15px;
+}
+
+#exp-pro .icons .icon{
+  margin-left:15px;
 }
 
 .btn {
@@ -324,7 +385,7 @@ margin-bottm: 20pxo;
   display: inline-block;
   position: relative;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 14px; /*12px*/
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
