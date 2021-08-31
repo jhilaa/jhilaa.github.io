@@ -286,13 +286,9 @@ aside {
   border-right: 7px solid var(--main-bg-color);
 }
 
-/*
-#timeline .timeline-item .timeline-content.perso:before {
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-left: 7px solid var(--perso-bg-color) transparent;
+#timeline .timeline-item .timeline-content.ALD.right:before {
+  border-right: 7px solid #c8c8c8;
 }
-*/
 
 #timeline .timeline-item .timeline-content.right {
   float: right;
@@ -300,21 +296,6 @@ aside {
 
 #timeline .timeline-item .timeline-content.left {
   float: left;
-}
-
-/*
-#timeline .timeline-item .timeline-content.right.h2.ALD:before {
-  content: "";
-  right: 45%;
-  left: inherit;
-  border-left: 0;
-  border-right: 7px solid var(--main-bg-color);
-}
-*/
-
-.ALD:before {
-  border-right: 7px solid blue; /*#c8c8c8;*/
-  background: blue;
 }
 
 #timeline .timeline-item .timeline-content h2.ALD {
