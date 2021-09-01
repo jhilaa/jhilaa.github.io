@@ -412,16 +412,13 @@ aside {
   #timeline .timeline-item .timeline-content {
     width: 90%;
     float: right;
-    margin-top: 20px;
   }
   #timeline .timeline-item .timeline-content:before,
-  #timeline .timeline-item .timeline-content.right:before 
-  #timeline .timeline-item .timeline-content.left:before{
+  #timeline .timeline-item .timeline-content.right:before {
     left: 10%;
     margin-left: -6px;
     border-left: 0;
     border-right: 7px solid var(--main-bg-color);
-    float : left;
   }
   #timeline .timeline-item .timeline-icon {
     left: 0;
@@ -439,11 +436,6 @@ aside {
   width: 35px;
   margin: auto;
 }
-
-.timeline-item {
-  margin-top: 200px;
-}
-
 .techno {
   margin-bottom: 5px;
 }
