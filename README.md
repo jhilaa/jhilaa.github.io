@@ -3,6 +3,7 @@ Repository contenant mon CV et les portfolio/réalisations développées dans le
 
 __index.html__
 __style .css__
+
  : CV en ligne
 
 __portfolio-ada/__  
