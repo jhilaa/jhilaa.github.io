@@ -1,8 +1,8 @@
 # jhilaa.github.io
 Repository contenant mon CV et les portfolio/réalisations développées dans le cadre de ma formation à Ada Tech School
 
-* index.html
-* style .css  
+__index.html__
+__style .css__
  : CV en ligne
 
 __portfolio-ada/__  
