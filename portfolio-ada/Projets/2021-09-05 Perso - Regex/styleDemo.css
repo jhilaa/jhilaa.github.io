@@ -1,0 +1,89 @@
+body,
+input {
+  font-size: 20px;
+}
+
+.resultMatch {
+  font-size: 20px;
+}
+
+#matchContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  grid-template-rows: repeat(5, 50px);
+  grid-gap: 10px;
+  width: 50%;
+}
+
+.bold {
+  text-decoration: underline;
+  font-weight: bold;
+  background-color: rgb(255, 206, 47);
+}
+
+.enTeteVar {
+  grid-column: 1;
+  grid-row: 1;
+}
+#txtMatch1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+#txtMatch2 {
+  grid-column: 1;
+  grid-row: 3;
+}
+#txtMatch3 {
+  grid-column: 1;
+  grid-row: 4;
+}
+/**********/
+.enTeteRegex {
+  grid-column: 2;
+  grid-row: 1;
+}
+#regexMatch1 {
+  grid-column: 2;
+  grid-row: 2;
+}
+#regexMatch2 {
+  grid-column: 2;
+  grid-row: 3;
+}
+#regexMatch3 {
+  grid-column: 2;
+  grid-row: 4;
+}
+/**************/
+.EnTeteResult {
+  grid-column: 3;
+  grid-row: 1;
+}
+#resultMatch1 {
+  grid-column: 3;
+  grid-row: 2;
+}
+#resultMatch2 {
+  grid-column: 3;
+  grid-row: 3;
+}
+#resultMatch3 {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+.resultMatch {
+  margin-left: 0px;
+}
+
+.bouton {
+  margin: 5px;
+  padding: 10px;
+  width: 50px;
+  height: 20px;
+  border: 1px solid gray;
+  background-color: rgb(243, 243, 243);
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+}

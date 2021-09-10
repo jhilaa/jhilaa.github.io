@@ -1,0 +1,63 @@
+body {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+body,
+input,
+.hidden,
+button {
+  font-size: 20px;
+}
+
+.aTester {
+  margin-bottom: 10px;
+}
+
+input {
+  margin-top: 10px;
+}
+
+input,
+.hidden {
+  width: 75%;
+}
+
+.hidden {
+  color: lightgrey;
+  background-color: lightgrey;
+  border: 1px solid grey;
+}
+.hidden:hover {
+  color: black;
+}
+
+main,
+aside {
+  margin-left: 50px;
+  margin-top: 15px;
+}
+
+button {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+h4 {
+  text-decoration: underline;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bouton {
+  margin: 5px;
+  padding: 10px;
+  width: 50px;
+  height: 20px;
+  border: 1px solid gray;
+  background-color: rgb(243, 243, 243);
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styleDemo.css" />
+    <title>Simulateur de Regex</title>
+  </head>
+  <body>
+    <div id="matchContainer">
+      <p class="enTeteVar"><code>var txt =</code></p>
+      <input
+        type="text"
+        id="txtMatch1"
+        class="txtMatch"
+        value="Ada Tech School"
+      />
+      <input type="text" id="txtMatch2" class="txtMatch" value="Ada Lovelace" />
+      <input type="text" id="txtMatch3" class="txtMatch" value="Padawan" />
+      <!---------->
+      <p class="enTeteRegex">
+        <code>var <span class="bold">regex</span> =</code>
+      </p>
+      <input type="text" id="regexMatch1" class="regexMatch" value="Ada" />
+      <input type="text" id="regexMatch2" class="regexMatch" value="Ada" />
+      <input type="text" id="regexMatch3" class="regexMatch" value="Ada" />
+      <!---------->
+      <p class="EnTeteResult">
+        <code ;>regex<span class="bold">.test(txt)</span> =</code>
+      </p>
+      <input type="text" id="resultMatch1" class="resultMatch" value="true" />
+      <input type="text" id="resultMatch2" class="resultMatch" value="true" />
+      <input type="text" id="resultMatch3" class="resultMatch" value="true" />
+      <a class="bouton" href="regexSimulator.html">>></a>
+    </div>
+
+    <!----------->
+    <script src="scriptDemo.js"></script>
+    <!--------------->
+    <style></style>
+  </body>
+</html>

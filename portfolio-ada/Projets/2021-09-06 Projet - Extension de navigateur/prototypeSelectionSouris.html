@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- this example shows the text you selected, and all the text within the anchor node-->
+    <title>AnchorNode Example</title>
+    <script type="text/javascript">
+      function getAnchorNode() {
+        if (window.getSelection) {
+          //only work if supported
+          var selection = window.getSelection(); //get the selection object
+          alert(
+            "Selected text: \n" +
+              selection.toString()
+          );
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div onmouseup="getAnchorNode()">
+      <!-- call this function when the mouse button is released -->
+      <p>
+        Select some text with your mouse within this field. When the left button
+        is released, a dialog pops up with the anchor node.
+      </p>
+      <p>This is some more text to try as well.</p>
+    </div>
+  </body>
+</html>

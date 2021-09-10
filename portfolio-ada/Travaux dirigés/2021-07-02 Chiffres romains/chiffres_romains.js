@@ -1,10 +1,28 @@
-var inputUser = prompt("chiffre romain");
-var myRegex = new RegExp("(X)XXI");
+function convertirNombreArabeEnNombreRomain(numAConvertir) {
+  var lookup = {
+      M: 1000,
+      CM: 900,
+      D: 500,
+      CD: 400,
+      C: 100,
+      XC: 90,
+      L: 50,
+      XL: 40,
+      X: 10,
+      IX: 9,
+      V: 5,
+      IV: 4,
+      I: 1,
+    },
+    nombreRomain = "",
+    i;
+  for (i in lookup) {
+    while (numAConvertir >= lookup[i]) {
+      nombreRomain += i;
+      numAConvertir -= lookup[i];
+    }
+  }
+  return nombreRomain;
+}
 
-alert("input : " + inputUser)
-
-var tabSymbole = myRegex.exec(inputUser);
-
-alert(tabSymbole);
-
-
+console.log(convertirNombreArabeEnNombreRomain(459));

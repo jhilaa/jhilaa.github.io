@@ -2,6 +2,7 @@ function estDivisiblePar(n, d) {
   return !(n % d);
 }
 
+// test pour savoir si un nombre est 1er
 function estPremier(n) {
   testpremier = true;
   for (i = 2; i < n; i++) {
@@ -11,6 +12,7 @@ function estPremier(n) {
 }
 console.log(estPremier(15));
 
+// n 1ers nombre premiers
 function rechercheNbres1ers(n) {
   var L = [2];
   var k = 3;
@@ -23,9 +25,10 @@ function rechercheNbres1ers(n) {
   return L;
 }
 
-console.log(rechercheNbres1ers(9));
+console.log(rechercheNbres1ers(5));
 
 /** WIP */
+/*
 function rechercheNbres1ersOpti(n) {
   var L = [2];
   var k = 3;

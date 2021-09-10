@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main">
+      <p>
+        Conversion de camelCase en snake_case grâce aux parenthèses capturantes
+      </p>
+      <p>
+        <code class="code">
+          var snake_case = camelCase.value.replaceAll(regex, "<span class="h1">$1</span>_<span class="h1">$2</span>");
+        </code>
+      </p>
+      <label for="camelCase"></label>
+      <input
+        label="camelCase"
+        type="camelCase"
+        id="camelCase"
+        size="50"
+        placeholder="camelCase"
+        autofocus
+      />
+      <label for="regex">regex</label>
+      <input
+        type="camelCase"
+        id="regex"
+        size="50"
+        value="([a-z])([A-Z])"
+        autofocus
+      />
+      <label for="result">snake_case</label>
+      <input
+        type="camelCase"
+        id="result"
+        size="50"
+        placeholder="snake_case"
+        autofocus
+      />
+    </div>
+  </body>
+
+  <script>
+    let regex = document.getElementById("regex");
+    let result = document.getElementById("result");
+    let camelCase = document.getElementById("camelCase");
+
+    function appliquerRegex() {
+      var newRegex = new RegExp(regex.value, "g");
+      console.log(newRegex);
+      var snakeCase = camelCase.value.replaceAll(newRegex, "$1_$2"); //camelCase.value.replaceAll(regex, "test");
+      result.value = snakeCase.toLowerCase();
+    }
+
+    camelCase.addEventListener("input", function (e) {
+      appliquerRegex();
+    });
+  </script>
+
+  <style>
+    body {
+      margin-top: 25px;
+      font-size: 20px;
+      font-size: 18px;
+    }
+    input {
+      width: 150px;
+      height: 20px;
+    }
+
+    .h1{
+      font-weight: bold;
+      color: brown;
+    }
+  </style>
+</html>

@@ -69,7 +69,7 @@ def main (stdscr):
                 if state[i][j] == "O":
                     stdscr.addstr(i, j, state[i][j]) #"O") # attention, curses met y avant x
                 else :
-                    stdscr                  tdscr.addstr(i, j, state[i][j]) #".")
+                    stdscr.addstr(i, j, state[i][j]) #".")
         # Fonction qui affiche ce qu'on a préparé
         stdscr.refresh()
         
