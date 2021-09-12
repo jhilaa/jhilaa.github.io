@@ -12,7 +12,7 @@ header:before {
 :root {
   --main-bg-color: #ee4d4d;
   --perso-bg-color: #ffab7b;
-  --debbug-border: 2px;
+  --debbug-border: 0px;
 }
 
 *,
@@ -425,6 +425,10 @@ aside {
   }
   #timeline .timeline-item .timeline-icon {
     left: 0;
+  }
+
+  .left {
+    margin-left: 40px;
   }
 
   
