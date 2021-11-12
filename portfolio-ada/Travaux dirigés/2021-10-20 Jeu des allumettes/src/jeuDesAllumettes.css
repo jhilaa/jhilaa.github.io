@@ -1,0 +1,44 @@
+#plateau {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 175px;
+  width: 1000px;
+  border: 0px green solid;
+}
+
+.allumetteJoueur {
+  width: 15px;
+  height: 175px;
+  border: 0px rgb(48, 48, 48) solid;
+  background: linear-gradient(
+    90deg,
+    rgba(237, 236, 235, 1) 0%,
+    rgba(255, 255, 255, 1) 84%,
+    rgba(227, 227, 226, 1) 100%
+  );
+}
+
+.allumetteOrdi {
+  width: 15px;
+  height: 175px;
+  border: 0px rgb(48, 48, 48) solid;
+  background: linear-gradient(
+    90deg,
+    rgba(237, 236, 235, 1) 0%,
+    rgba(255, 255, 255, 1) 84%,
+    rgba(227, 227, 226, 1) 100%
+  );
+}
+
+.allumetteOff {
+  width: 15px;
+  height: 175px;
+  border: 1px rgb(48, 48, 48) solid;
+  background: linear-gradient(
+    90deg,
+    rgba(68, 47, 10, 1) 0%,
+    rgba(11, 7, 0, 1) 84%,
+    rgba(68, 47, 10, 1) 100%
+  );
+}

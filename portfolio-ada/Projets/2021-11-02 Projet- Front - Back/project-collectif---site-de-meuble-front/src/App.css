@@ -1,0 +1,215 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Montserrat", sans-serif;
+}
+/* CSS de base react --- ne pas toucher (ça crée des conflits avec notre CSS) */
+
+.App {
+  text-align: center;
+  background-color: #eeebdd;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Header */
+.marque h1 {
+  font-weight: 900;
+  font-size: 70px;
+  letter-spacing: -6px;
+  padding-right: 30px;
+}
+img.logo {
+  width: 70px;
+  height: 70px;
+}
+
+.headerApp {
+  color: #eeebdd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30vh;
+  width: 100%;
+  background-color: rgba(99, 0, 0, 0.7);
+}
+
+.marque {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+img.logoAF {
+  width: 200px;
+}
+
+.menu {
+  margin-right: 20px;
+}
+
+.menu nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 20vh;
+  border: #282c34 2px solid;
+}
+
+/* page accueil - items rows */
+.container {
+  margin-top: 30px;
+}
+
+.row {
+  margin-top: 10px;
+}
+
+/* colonne items */
+.col {
+  margin: 10px 5px 5px 5px;
+  padding: 1rem;
+  background-color: #d8b6a4;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  width: 500px;
+}
+
+.rowItem {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  border: 2px solid #fff;
+}
+
+/* modal description */
+
+.modal_description {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_description_content {
+  width: 900px;
+  background-color: white;
+  color: black;
+}
+
+.modal_description_header,
+.modal_description_footer {
+  padding: 10px;
+}
+
+.modal_description_body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.button_description {
+  display: flex;
+  flex-direction: flex-end;
+}
+
+.modal_description_header {
+  display: flex;
+}
+
+.wrapper_description {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-wrapper-top {
+  display: flex;
+  align-items: row;
+  flex-direction: flex-start;
+}
+
+.photo_description {
+  width: 600px;
+}
+
+.info_description {
+  width: 300px;
+}
+
+.details_description {
+  height: 100px;
+}
+
+.image_description {
+  width: 500px;
+  height: auto;
+}
+
+/* footer in progress */
+footer {
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #9e7777;
+  text-decoration: none;
+}
+/* Pas marché: faire disparaitre le soulignement des liens */
+.liens {
+  text-decoration: none;
+}
+.photo {
+  height: 150px;
+  width: auto;
+  border: 2px solid rgba(240, 162, 162, 0.7);
+  border-radius: 10px;
+}
+.button_style {
+  margin: 4px;
+  border: 3px solid rgba(99, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 4px;
+}

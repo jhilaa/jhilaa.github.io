@@ -5,7 +5,12 @@ let newText;
 function getCurrentTab() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tab) {
     chrome.tabs.sendMessage(tab[0].id, { greeting: "hello" }, function (response) {
-      newText = newText + " " + response;
+      if (newText=="" || newText==undefined) {
+        newText = response;
+      }
+      else {
+      newText = newText + "\n" + response;
+      }
       document.getElementById("textarea").innerHTML = newText;
       setLocalStorage(newText);
     });

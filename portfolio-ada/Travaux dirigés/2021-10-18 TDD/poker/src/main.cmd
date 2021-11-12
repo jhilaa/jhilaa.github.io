@@ -1,0 +1,1 @@
+cmd /k "tsc poker.ts && node poker.js "

@@ -1,0 +1,17 @@
+{
+  "name": "jeudesallumettes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jeuDesAllumettes.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
